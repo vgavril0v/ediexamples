@@ -1,0 +1,486 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0EFFB1E8-A1F4-4410-9770-7410746C2355}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Parser2</RootNamespace>
+    <AssemblyName>Parser2</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EdiFabric.Core, Version=9.8.7.2, Culture=neutral, PublicKeyToken=30198c5f4974e51a, processorArchitecture=MSIL">
+      <HintPath>..\packages\EdiFabric.Core.Full.9.8.7.2\lib\net45\EdiFabric.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="EdiFabric.Framework, Version=9.8.7.2, Culture=neutral, PublicKeyToken=30198c5f4974e51a, processorArchitecture=MSIL">
+      <HintPath>..\packages\EdiFabric.Framework.Full.9.8.7.2\lib\net45\EdiFabric.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="EdiFabric.Plugins.Ack.Edifact, Version=9.8.7.2, Culture=neutral, PublicKeyToken=30198c5f4974e51a, processorArchitecture=MSIL">
+      <HintPath>..\packages\EdiFabric.Plugins.Ack.Edifact.Full.9.8.7.2\lib\net45\EdiFabric.Plugins.Ack.Edifact.dll</HintPath>
+    </Reference>
+    <Reference Include="EdiFabric.Plugins.Ack.X12, Version=9.8.7.2, Culture=neutral, PublicKeyToken=30198c5f4974e51a, processorArchitecture=MSIL">
+      <HintPath>..\packages\EdiFabric.Plugins.Ack.X12.Full.9.8.7.2\lib\net45\EdiFabric.Plugins.Ack.X12.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Authentication.Abstractions, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Authentication.Abstractions.2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.Authentication.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Authentication.Core, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Authentication.Core.2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.Authentication.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Authorization, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Authorization.2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.Authorization.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Authorization.Policy, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Authorization.Policy.2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.Authorization.Policy.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Hosting.Abstractions, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Hosting.Abstractions.2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.Hosting.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Hosting.Server.Abstractions, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Hosting.Server.Abstractions.2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.Hosting.Server.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Http.2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http.Abstractions, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Http.Abstractions.2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.Http.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http.Extensions, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Http.Extensions.2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http.Features, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Http.Features.2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.Http.Features.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Mvc.Abstractions, Version=2.1.3.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Mvc.Abstractions.2.1.3\lib\netstandard2.0\Microsoft.AspNetCore.Mvc.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Mvc.Core, Version=2.1.3.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Mvc.Core.2.1.3\lib\netstandard2.0\Microsoft.AspNetCore.Mvc.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.ResponseCaching.Abstractions, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.ResponseCaching.Abstractions.2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.ResponseCaching.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Routing, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Routing.2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.Routing.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Routing.Abstractions, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Routing.Abstractions.2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.Routing.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.WebUtilities, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.WebUtilities.2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.WebUtilities.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.DotNet.PlatformAbstractions, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.DotNet.PlatformAbstractions.2.1.0\lib\net45\Microsoft.DotNet.PlatformAbstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Caching.Abstractions, Version=3.1.3.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Caching.Abstractions.3.1.3\lib\netstandard2.0\Microsoft.Extensions.Caching.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Caching.Memory, Version=3.1.3.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Caching.Memory.3.1.3\lib\netstandard2.0\Microsoft.Extensions.Caching.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration, Version=3.1.3.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.3.1.3\lib\netstandard2.0\Microsoft.Extensions.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.Abstractions, Version=3.1.3.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.Abstractions.3.1.3\lib\netstandard2.0\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.Binder, Version=3.1.3.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.Binder.3.1.3\lib\netstandard2.0\Microsoft.Extensions.Configuration.Binder.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.2.1.1\lib\net461\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=3.1.3.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.3.1.3\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyModel, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyModel.2.1.0\lib\net451\Microsoft.Extensions.DependencyModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.FileProviders.Abstractions, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.FileProviders.Abstractions.2.1.1\lib\netstandard2.0\Microsoft.Extensions.FileProviders.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Hosting.Abstractions, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Hosting.Abstractions.2.1.1\lib\netstandard2.0\Microsoft.Extensions.Hosting.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=3.1.3.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.3.1.3\lib\netstandard2.0\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.ObjectPool, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.ObjectPool.2.1.1\lib\netstandard2.0\Microsoft.Extensions.ObjectPool.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Options, Version=3.1.3.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Options.3.1.3\lib\netstandard2.0\Microsoft.Extensions.Options.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Primitives, Version=3.1.3.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Primitives.3.1.3\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Net.Http.Headers, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.Headers.2.1.1\lib\netstandard2.0\Microsoft.Net.Http.Headers.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="R1.AuthClient.Configuration, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\R1.AuthClient.Configuration.2.0.0\lib\netstandard2.0\R1.AuthClient.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="R1.AuthenticationContext, Version=5.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\R1.AuthenticationContext.5.0.0\lib\netstandard2.0\R1.AuthenticationContext.dll</HintPath>
+    </Reference>
+    <Reference Include="R1.AuthenticationService.ClientV2, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\R1.AuthenticationService.ClientV2.3.0.0\lib\netstandard2.0\R1.AuthenticationService.ClientV2.dll</HintPath>
+    </Reference>
+    <Reference Include="R1.AuthenticationService.ClientV2.Contract, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\R1.AuthenticationService.ClientV2.Contract.3.0.0\lib\netstandard2.0\R1.AuthenticationService.ClientV2.Contract.dll</HintPath>
+    </Reference>
+    <Reference Include="R1.AuthenticationService.ClientV2.DI, Version=3.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\R1.AuthenticationService.ClientV2.DI.3.0.1\lib\netstandard2.0\R1.AuthenticationService.ClientV2.DI.dll</HintPath>
+    </Reference>
+    <Reference Include="R1.ContextManagers.Contract, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\R1.ContextManagers.Contract.2.0.0\lib\netstandard2.0\R1.ContextManagers.Contract.dll</HintPath>
+    </Reference>
+    <Reference Include="R1.DefaultTokenContexts, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\R1.DefaultTokenContexts.2.0.0\lib\netstandard2.0\R1.DefaultTokenContexts.dll</HintPath>
+    </Reference>
+    <Reference Include="R1.DefaultTokenContexts.Contract, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\R1.DefaultTokenContexts.Contract.2.0.0\lib\netstandard2.0\R1.DefaultTokenContexts.Contract.dll</HintPath>
+    </Reference>
+    <Reference Include="R1.DefaultTokenProviders, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\R1.DefaultTokenProviders.2.0.0\lib\netstandard2.0\R1.DefaultTokenProviders.dll</HintPath>
+    </Reference>
+    <Reference Include="R1.GenericTokenContext, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\R1.GenericTokenContext.2.0.0\lib\netstandard2.0\R1.GenericTokenContext.dll</HintPath>
+    </Reference>
+    <Reference Include="R1.GenericTokenContext.Contract, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\R1.GenericTokenContext.Contract.2.0.0\lib\netstandard2.0\R1.GenericTokenContext.Contract.dll</HintPath>
+    </Reference>
+    <Reference Include="R1.Interactions.RoutingFilters, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\R1.Interactions.RoutingFilters.2.0.0\lib\netstandard2.0\R1.Interactions.RoutingFilters.dll</HintPath>
+    </Reference>
+    <Reference Include="R1.MimeMapping, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\R1.MimeMapping.1.0.0\lib\netstandard2.0\R1.MimeMapping.dll</HintPath>
+    </Reference>
+    <Reference Include="R1.Raml2DotNet.Contract, Version=2.14.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\R1.Raml2DotNet.Contract.2.14.1\lib\netstandard2.0\R1.Raml2DotNet.Contract.dll</HintPath>
+    </Reference>
+    <Reference Include="R1.Raml2DotNet.Contract.Exceptions, Version=1.2.8.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\R1.Raml2DotNet.Contract.Exceptions.1.2.8\lib\netstandard2.0\R1.Raml2DotNet.Contract.Exceptions.dll</HintPath>
+    </Reference>
+    <Reference Include="R1.Raml2DotNet.Serialization.Contract, Version=1.0.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\R1.Raml2DotNet.Serialization.Contract.1.0.7\lib\netstandard2.0\R1.Raml2DotNet.Serialization.Contract.dll</HintPath>
+    </Reference>
+    <Reference Include="R1.Raml2DotNet.Serialization.Exceptions, Version=1.0.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\R1.Raml2DotNet.Serialization.Exceptions.1.0.7\lib\netstandard2.0\R1.Raml2DotNet.Serialization.Exceptions.dll</HintPath>
+    </Reference>
+    <Reference Include="R1.Raml2DotNet.Statics.V3, Version=3.28.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\R1.Raml2DotNet.Statics.V3.3.28.1\lib\netstandard2.0\R1.Raml2DotNet.Statics.V3.dll</HintPath>
+    </Reference>
+    <Reference Include="R1.RemoteConfiguration.V1.Client, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\R1.RemoteConfiguration.V1.Client.1.2.0.456\lib\netstandard2.0\R1.RemoteConfiguration.V1.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="R1.RemoteConfiguration.V1.Client.Contract, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\R1.RemoteConfiguration.V1.Client.Contract.1.2.0.456\lib\netstandard2.0\R1.RemoteConfiguration.V1.Client.Contract.dll</HintPath>
+    </Reference>
+    <Reference Include="R1.RemoteConfiguration.V2.Client, Version=0.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\R1.RemoteConfiguration.V2.Client.0.4.0.456\lib\netstandard2.0\R1.RemoteConfiguration.V2.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="R1.RemoteConfiguration.V2.Client.Contract, Version=0.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\R1.RemoteConfiguration.V2.Client.Contract.0.4.0.456\lib\netstandard2.0\R1.RemoteConfiguration.V2.Client.Contract.dll</HintPath>
+    </Reference>
+    <Reference Include="R1.SecurityToken.V1.Client, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\R1.SecurityToken.V1.Client.1.3.0.456\lib\netstandard2.0\R1.SecurityToken.V1.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="R1.SecurityToken.V1.Client.Contract, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\R1.SecurityToken.V1.Client.Contract.1.3.0.456\lib\netstandard2.0\R1.SecurityToken.V1.Client.Contract.dll</HintPath>
+    </Reference>
+    <Reference Include="R1.SecurityToken.V2.Client, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\R1.SecurityToken.V2.Client.0.7.0.456\lib\netstandard2.0\R1.SecurityToken.V2.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="R1.SecurityToken.V2.Client.Contract, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\R1.SecurityToken.V2.Client.Contract.0.7.0.456\lib\netstandard2.0\R1.SecurityToken.V2.Client.Contract.dll</HintPath>
+    </Reference>
+    <Reference Include="R1.WalmartInStoreOrders.V1.Client, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\R1.WalmartInStoreOrders.V1.Client.1.1.0.531\lib\netstandard2.0\R1.WalmartInStoreOrders.V1.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="R1.WalmartInStoreOrders.V1.Client.Contract, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\R1.WalmartInStoreOrders.V1.Client.Contract.1.1.0.531\lib\netstandard2.0\R1.WalmartInStoreOrders.V1.Client.Contract.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.4.7.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.ConfigurationManager, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Configuration.ConfigurationManager.4.7.0\lib\net461\System.Configuration.ConfigurationManager.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.3.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.5.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.3\lib\netstandard2.0\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.6\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.4.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.7.1\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.0.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Security.AccessControl, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.AccessControl.4.7.0\lib\net461\System.Security.AccessControl.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Permissions, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Permissions.4.7.0\lib\net461\System.Security.Permissions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Principal.Windows, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Principal.Windows.4.7.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Text.Encodings.Web, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.4.5.0\lib\netstandard2.0\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.2\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AsnWriter.cs" />
+    <Compile Include="D97A\AckBuilders.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_APERAK.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_AUTHOR.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_BANSTA.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_BAPLIE.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_BAPLTE.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_BOPBNK.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_BOPCUS.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_BOPDIR.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_BOPINF.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_CALINF.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_CASINT.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_CASRES.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_COARRI.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_CODECO.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_CODENO.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_Codes.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_COEDOR.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_COHAOR.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_COMDIS.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_ComplexElementInterfaces.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_ComplexElements.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_CONAPW.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_CONDPV.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_CONDRA.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_CONDRO.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_CONEST.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_CONITT.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_CONPVA.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_CONQVA.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_CONRPW.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_CONTEN.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_CONWQD.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_COPARN.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_COPINO.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_COPRAR.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_COREOR.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_COSTCO.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_COSTOR.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_CREADV.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_CREEXT.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_CREMUL.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_CUSCAR.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_CUSDEC.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_CUSEXP.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_CUSREP.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_CUSRES.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_DEBADV.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_DEBMUL.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_DELFOR.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_DELJIT.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_DESADV.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_DESTIM.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_DGRECA.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_DIRDEB.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_DIRDEF.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_DOCADV.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_DOCAMA.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_DOCAMI.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_DOCAMR.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_DOCAPP.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_DOCARE.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_DOCINF.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_FINCAN.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_FINSTA.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_GENRAL.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_GESMES.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_HANMOV.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_IFCSUM.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_IFTCCA.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_IFTDGN.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_IFTFCC.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_IFTIAG.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_IFTMAN.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_IFTMBC.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_IFTMBF.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_IFTMBP.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_IFTMCS.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_IFTMIN.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_IFTRIN.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_IFTSAI.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_IFTSTA.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_IFTSTQ.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_INSPRE.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_INVOIC.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_INVRPT.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_ITRRPT.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_JAPRES.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_JINFDE.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_JOBAPP.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_JOBCON.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_JOBMOD.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_JOBOFF.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_MEDPID.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_MEDREQ.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_MEDRPT.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_MEQPOS.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_MOVINS.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_MSCONS.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_ORDCHG.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_ORDERS.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_ORDRSP.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_OSTENQ.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_OSTRPT.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_PARTIN.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_PAXLST.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_PAYDUC.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_PAYEXT.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_PAYMUL.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_PAYORD.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_PRICAT.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_PRODAT.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_PRODEX.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_PROINQ.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_PRPAID.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_QALITY.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_QUOTES.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_RDRMES.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_REBORD.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_RECADV.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_RECALC.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_RECECO.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_RECLAM.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_REMADV.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_REPREM.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_REQDOC.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_REQOTE.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_RESETT.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_RESMSG.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_RETACC.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_SAFHAZ.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_SANCRT.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_SegmentInterfaces.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_Segments.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_SLSFCT.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_SLSRPT.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_SSIMOD.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_SSRECH.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_SSREGW.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_STATAC.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_SUPCOT.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_SUPMAN.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_SUPRES.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_TANSTA.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_VATDEC.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_VESDEP.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_WASDIS.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_WKGRDC.cs" />
+    <Compile Include="D97A\EF_EDIFACT_D97A_WKGRRE.cs" />
+    <Compile Include="DespatchAdviceWriter.cs" />
+    <Compile Include="DespatchAdviceShipmentBuilder.cs" />
+    <Compile Include="DespatchAdviceGRBuilder.cs" />
+    <Compile Include="EDIFactSegmentBuilders.cs" />
+    <Compile Include="EdiFactTranslator.cs" />
+    <Compile Include="LenovoApi\LenovoCatalogClient.cs" />
+    <Compile Include="X12\EF_X12_005010_816.cs" />
+    <Compile Include="X12\EF_X12_005010_850.cs" />
+    <Compile Include="X12\EF_X12_005010_856.cs" />
+    <Compile Include="X12\EF_X12_005010_997.cs" />
+    <Compile Include="X12\EF_X12_005010_Codes.cs" />
+    <Compile Include="X12\EF_X12_005010_ComplexElementInterfaces.cs" />
+    <Compile Include="X12\EF_X12_005010_ComplexElements.cs" />
+    <Compile Include="X12\EF_X12_005010_SegmentInterfaces.cs" />
+    <Compile Include="X12\EF_X12_005010_Segments.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\NETStandard.Library.2.0.1\build\netstandard2.0\NETStandard.Library.targets" Condition="Exists('..\packages\NETStandard.Library.2.0.1\build\netstandard2.0\NETStandard.Library.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\NETStandard.Library.2.0.1\build\netstandard2.0\NETStandard.Library.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NETStandard.Library.2.0.1\build\netstandard2.0\NETStandard.Library.targets'))" />
+  </Target>
+</Project>
