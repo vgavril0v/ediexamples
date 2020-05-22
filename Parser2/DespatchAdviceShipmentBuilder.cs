@@ -27,10 +27,15 @@ namespace Parser2
             result.UNH.MessageIdentifier_02.MessageReleaseNumber_03 = "97A";
             result.UNH.MessageIdentifier_02.ControllingAgencyCoded_04 = "UN";
 
-            result.BGM = new BGM();
-            result.BGM.DOCUMENTMESSAGENAME_01 = new C002();
-            result.BGM.DOCUMENTMESSAGENAME_01.Documentmessagenamecoded_01 = "630";
-            result.BGM.Messagefunctioncoded_03 = "8";
+            result.BGM = new BGM
+            {
+                DOCUMENTMESSAGENAME_01 = new C002 {Documentmessagenamecoded_01 = "630"},
+                DOCUMENTMESSAGEIDENTIFICATION_02 = new C106
+                {
+                    Documentmessagenumber_01 = RandomStringGenerator.RandomString(10)
+                },//BOL here
+                Messagefunctioncoded_03 = "8"
+            };
 
             result.DTM = new List<DTM>
             {
