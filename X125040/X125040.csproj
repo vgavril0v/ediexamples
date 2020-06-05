@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EdiFabric.Core.Full" Version="9.8.7.2" />
+    <PackageReference Include="EdiFabric.Framework.Full" Version="9.8.7.2" />
+    <PackageReference Include="EdiFabric.Plugins.Ack.X12.Full" Version="9.8.7.2" />
+  </ItemGroup>
+
+</Project>

@@ -63,47 +63,52 @@ namespace Parser2
             foreach (var fileName in Directory.EnumerateFiles(ediSourcePath, fileNameFilter ?? "*"))
             {
 
-                    using (var ackMan = new EdiFabric.Plugins.Acknowledgments.Edifact.AckMan(settings))
+                var ackMan = withAcknowlegment ? new EdiFabric.Plugins.Acknowledgments.Edifact.AckMan(settings) : null;
+                try
+                {
+                    using (EdifactReader reader = new EdifactReader(new FileStream(fileName, FileMode.Open)))
                     {
-                        using (EdifactReader reader = new EdifactReader(new FileStream(fileName, FileMode.Open)))
+                        var ediItems = reader.ReadToEnd().ToList();
+                        Console.WriteLine(Path.GetFileName(fileName));
+                        foreach (var ediItem in ediItems)
                         {
-                            var ediItems = reader.ReadToEnd().ToList();
-                            Console.WriteLine(Path.GetFileName(fileName));
-                            foreach (var ediItem in ediItems)
+                            /*
+                             *.Where(i =>
+                            !(i is EdiFabric.Core.Model.Edi.Edifact.UNB) &&
+                            !(i is EdiFabric.Core.Model.Edi.Edifact.UNG) &&
+                            !(i is EdiFabric.Core.Model.Edi.Edifact.UNE) &&
+                            !(i is EdiFabric.Core.Model.Edi.Edifact.UNZ)
+                        )
+                             */
+                            if (withAcknowlegment)
+                                ackMan.Publish(ediItem);
+
+                            var resultFileName = Path.Combine(translatedFolderPath,
+                                Path.GetFileNameWithoutExtension(fileName) + ".txt");
+                            if (ediItem is TSDESADV)
                             {
-                                /*
-                                 *.Where(i =>
-                                !(i is EdiFabric.Core.Model.Edi.Edifact.UNB) &&
-                                !(i is EdiFabric.Core.Model.Edi.Edifact.UNG) &&
-                                !(i is EdiFabric.Core.Model.Edi.Edifact.UNE) &&
-                                !(i is EdiFabric.Core.Model.Edi.Edifact.UNZ)
-                            )
-                                 */
-                                if(withAcknowlegment)
-                                    ackMan.Publish(ediItem);
-
-                                var resultFileName = Path.Combine(translatedFolderPath,
-                                    Path.GetFileNameWithoutExtension(fileName) + ".txt");
-                                if (ediItem is TSDESADV)
+                                var asn = (TSDESADV) ediItem;
+                                using (var writer = new FieldWriter(File.CreateText(resultFileName)))
                                 {
-                                    var asn = (TSDESADV)ediItem;
-                                    using (var writer = new FieldWriter(File.CreateText(resultFileName)))
-                                    {
-                                        WriteLenovoAsn(asn, writer);
-                                    }
+                                    WriteLenovoAsn(asn, writer);
                                 }
+                            }
 
-                                if (ediItem is TSORDERS)
+                            if (ediItem is TSORDERS)
+                            {
+                                var order = (TSORDERS) ediItem;
+                                using (var writer = new FieldWriter(File.CreateText(resultFileName)))
                                 {
-                                    var order = (TSORDERS)ediItem;
-                                    using (var writer = new FieldWriter(File.CreateText(resultFileName)))
-                                    {
-                                        WriteLenovoOrder(order, writer);
-                                    }
+                                    WriteLenovoOrder(order, writer);
                                 }
                             }
                         }
                     }
+                }
+                finally
+                {
+                    ackMan?.Dispose();
+                }
 
                 
             }

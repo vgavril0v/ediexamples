@@ -6,6 +6,8 @@ using System.Reflection;
 using EdiFabric.Framework.Readers;
 using EdiFabric.Templates.X12005010;
 using Parser2;
+using Parser2.InventoryReco;
+using TS856 = EdiFabric.Templates.X12005040.TS856;
 
 namespace EdiParser
 {
@@ -16,20 +18,26 @@ namespace EdiParser
         {
             var root = @"C:\work\dev\edi";
 
+            InventoryRecoSender.SendInventoryForReceivings(Path.Combine(root, @"sample\lenovo\to_respond")).Wait();
+            return;
+           //     X12214Writer.Write214(Path.Combine(root, "lw_sample\\214.txt"));
             // write goods received
             DespatchAdviceWriter.WriteEdiFactAsnResponse(
                 Path.Combine(root, @"sample\lenovo\to_respond"),
                 Path.Combine(Path.Combine(root, @"sample\lenovo\response")))
                 .Wait();
-
+                
             return;
-         /*   // translate edi fact
-            EdiFactTranslator.TranslateEdiFact(Path.Combine(root, @"sample\lenovo"),
-                Path.Combine(root, @"sample\lenovo\translated"));
+            //translate edi fact
+    //       EdiFactTranslator.TranslateEdiFact(Path.Combine(root, @"sample\lenovo"),
+    //            Path.Combine(root, @"sample\lenovo\translated"));
 
+        /*    X12Translator.TranslateX12(Path.Combine(root, @"lw_sample"),
+                Path.Combine(root, @"lw_sample\translated"),
+                Assembly.GetAssembly(typeof(TS856)));*/
             // write wm asn
-            var asn = new AsnWriter();
-            asn.WriteAsn(Path.Combine(root, Guid.NewGuid().ToString("D")));*/
+            //  var asn = new AsnWriter();
+            //  asn.WriteAsn(Path.Combine(root, Guid.NewGuid().ToString("D")));
 
             #region wm ack
 

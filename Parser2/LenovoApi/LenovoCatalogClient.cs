@@ -12,35 +12,7 @@ namespace Parser2.LenovoApi
 {
     public class LenovoCatalogClient
     {
-        private static IMemoryCache _cache = new MemoryCache(new MemoryCacheOptions
-        {
-
-        });
-
-
-
-        private static async Task<string> GetTokenFromCache() =>
-            await _cache.GetOrCreateAsync(
-                key: "Token_",
-                factory: async entry =>
-                {
-                    entry.SetAbsoluteExpiration(new TimeSpan(0, 0, 5, 0));
-
-                    var cl = new HttpClient();
-                    cl.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic",
-                        Convert.ToBase64String(
-                            Encoding.UTF8.GetBytes("40tI7PHRRHUoToHV0eSG7rulr38a:9N8MHYWmNq6bH1RTZjoVJjCmaKUa")));
-
-                    var content = new FormUrlEncodedContent(new KeyValuePair<string, string>[]
-                    {
-                        new KeyValuePair<string, string>("grant_type", "client_credentials")
-                    });
-
-                    var result = await cl.PostAsync("https://cn-api-test.lenovo.com/uat/token", content);
-
-                    return JsonConvert.DeserializeObject<Token>(await result.Content.ReadAsStringAsync()).access_token;
-                });
-
+       
         public static async Task<Dictionary<string, (Materiallist material, Materialplantlist plant, Materialdescribelist description)>>
             GetLenovoMaterials(IEnumerable<string> materialNumbers,
             string plant)
@@ -59,7 +31,7 @@ namespace Parser2.LenovoApi
                        "],\"languageCodeList\": [\"E\"],\"plantList\": [\"" + plant + "\"]} ";
             var content = new StringContent(data);
             content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-            var token = await GetTokenFromCache();
+            var token = await LenovoTokenClient.GetTokenFromCache();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             CatalogResponse obj = null;
             while (obj == null || (obj.code == "-1" && obj.msg.Contains("Null")))

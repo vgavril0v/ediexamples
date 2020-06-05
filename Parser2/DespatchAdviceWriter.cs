@@ -62,7 +62,7 @@ namespace Parser2
                 using (var writer = new EdifactWriter(stream, new EdifactWriterSettings{Encoding = Encoding.Default}))
                 {
                     writer.Write(Separators.Edifact.ToUna());
-                    writer.Write(EDIFactSegmentBuilders.BuildUnb("1"));
+                    writer.Write(EDIFactSegmentBuilders.BuildUnb(controlNumber));
                     writer.Write(transaction);
                 }
             }
