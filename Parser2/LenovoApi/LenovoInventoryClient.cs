@@ -15,11 +15,12 @@ namespace Parser2.LenovoApi
             var client = new HttpClient();
 
             var uri = new Uri(
-                "https://api-test.lenovo.com/locgateway/v2/inventory_recon/stock");
+                "https://api-cn-t.lenovo.com/uat/v1.0/supply_chain/gl/dc/stock");
 
             var content = new StringContent(JsonConvert.SerializeObject(data));
             content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-            var token = await LenovoTokenClient.GetTokenFromCache();
+            var token = await LenovoTokenClient.GetTokenFromCache("40tI7PHRRHUoToHV0eSG7rulr38a",
+                "iJMoZIjJyd2ZERXFwQw8oRhuNH8a"); 
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
             var res = await (await client.PostAsync(uri, content))

@@ -18,9 +18,9 @@ namespace Parser2.LenovoApi
 
 
 
-        public static async Task<string> GetTokenFromCache() =>
+        public static async Task<string> GetTokenFromCache(string clientId, string secret) =>
             await _cache.GetOrCreateAsync(
-                key: "Token_",
+                key: "Token_" + clientId + "_" + secret,
                 factory: async entry =>
                 {
                     entry.SetAbsoluteExpiration(new TimeSpan(0, 0, 5, 0));
@@ -28,7 +28,7 @@ namespace Parser2.LenovoApi
                     var cl = new HttpClient();
                     cl.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic",
                         Convert.ToBase64String(
-                            Encoding.UTF8.GetBytes("40tI7PHRRHUoToHV0eSG7rulr38a:9N8MHYWmNq6bH1RTZjoVJjCmaKUa")));
+                            Encoding.UTF8.GetBytes(clientId + ":" + secret)));
 
                     var content = new FormUrlEncodedContent(new KeyValuePair<string, string>[]
                     {

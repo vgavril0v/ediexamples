@@ -28,7 +28,7 @@ namespace Parser2.InventoryReco
         {
             return inventoryData.Select(d => new InventoryDataLine
             {
-                create_date = DateTime.UtcNow.ToString("ddMMyyyy"),
+                create_date = DateTime.UtcNow.ToString("yyyyMMdd"),
                 create_time = DateTime.UtcNow.ToString("HHmmss"),
                 timezone = "UTC+00",
                 unit_of_measurement = "EA",

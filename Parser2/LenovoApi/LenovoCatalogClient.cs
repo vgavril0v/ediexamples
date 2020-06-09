@@ -31,7 +31,7 @@ namespace Parser2.LenovoApi
                        "],\"languageCodeList\": [\"E\"],\"plantList\": [\"" + plant + "\"]} ";
             var content = new StringContent(data);
             content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-            var token = await LenovoTokenClient.GetTokenFromCache();
+            var token = await LenovoTokenClient.GetTokenFromCache("40tI7PHRRHUoToHV0eSG7rulr38a","9N8MHYWmNq6bH1RTZjoVJjCmaKUa");
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             CatalogResponse obj = null;
             while (obj == null || (obj.code == "-1" && obj.msg.Contains("Null")))

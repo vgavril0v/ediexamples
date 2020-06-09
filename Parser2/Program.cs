@@ -22,12 +22,12 @@ namespace EdiParser
             return;
            //     X12214Writer.Write214(Path.Combine(root, "lw_sample\\214.txt"));
             // write goods received
-            DespatchAdviceWriter.WriteEdiFactAsnResponse(
+       /*     DespatchAdviceWriter.WriteEdiFactAsnResponse(
                 Path.Combine(root, @"sample\lenovo\to_respond"),
                 Path.Combine(Path.Combine(root, @"sample\lenovo\response")))
                 .Wait();
                 
-            return;
+            return;*/
             //translate edi fact
     //       EdiFactTranslator.TranslateEdiFact(Path.Combine(root, @"sample\lenovo"),
     //            Path.Combine(root, @"sample\lenovo\translated"));
@@ -254,7 +254,7 @@ namespace EdiParser
                       }
                   return;*/
 
-                foreach (var file1 in Directory.EnumerateFiles(root, "*880___111.edi"))
+                foreach (var file1 in Directory.EnumerateFiles(root, "*RECONGROUP-925485US00-20200608095213093_519497895"))
                 {
 
                     // using (EdifactReader reader = new EdifactReader(new FileStream(Path.Combine(root, file), FileMode.Open),
@@ -273,101 +273,103 @@ namespace EdiParser
                                                   i is EdiFabric.Core.Model.Edi.ErrorContexts.ReaderErrorContext));
                         }
 
-                        WT("PO#");
-                        WT("date purchased");
-                        WT("additional dates");
-                        WT("monetary amount");
-                        WT("store");
-                        WT("line#");
-                        WT("item#");
-                        WT("upc");
-                        WT("model");
-                        WT("color");
-                        WT("upc");
-                        WT("Qty");
-                        WT("UnitPrice");
-                        WT("other", true);
-
-                        foreach (var ediItem in ediItems.Where(i => i is EdiFabric.Templates.X12005010.TS850))
+                        using (var fr = new FieldWriter(File.CreateText(@"c:\temp\wm_orders.csv")))
                         {
-                            var po = (EdiFabric.Templates.X12005010.TS850) ediItem;
+                            fr.WT("PO#");
+                            fr.WT("date purchased");
+                            fr.WT("additional dates");
+                            fr.WT("monetary amount");
+                            fr.WT("store");
+                            fr.WT("line#");
+                            fr.WT("item#");
+                            fr.WT("upc");
+                            fr.WT("model");
+                            fr.WT("color");
+                            fr.WT("upc");
+                            fr.WT("Qty");
+                            fr.WT("UnitPrice");
+                            fr.WT("other", true);
 
-                            var storeDict = new Dictionary<string, List<(PO1 PO1, string qty)>>();
-                            foreach (var line in po.PO1Loop)
+                            foreach (var ediItem in ediItems.Where(i => i is EdiFabric.Templates.X12005010.TS850))
                             {
+                                var po = (EdiFabric.Templates.X12005010.TS850) ediItem;
 
-                                foreach (var sdq in line.SDQ)
+                                var storeDict = new Dictionary<string, List<(PO1 PO1, string qty)>>();
+                                foreach (var line in po.PO1Loop)
                                 {
-                                    //WL("IdentificationCodeQualifier_02", sdq.IdentificationCodeQualifier_02);
-                                    WL1(MapLocation(ids, sdq.IdentificationCode_03), line.PO1, sdq.Quantity_04,
-                                        storeDict);
-                                    WL1(MapLocation(ids, sdq.IdentificationCode_05), line.PO1, sdq.Quantity_06,
-                                        storeDict);
-                                    WL1(MapLocation(ids, sdq.IdentificationCode_07), line.PO1, sdq.Quantity_08,
-                                        storeDict);
-                                    WL1(MapLocation(ids, sdq.IdentificationCode_09), line.PO1, sdq.Quantity_10,
-                                        storeDict);
-                                    WL1(MapLocation(ids, sdq.IdentificationCode_11), line.PO1, sdq.Quantity_12,
-                                        storeDict);
-                                    WL1(MapLocation(ids, sdq.IdentificationCode_13), line.PO1, sdq.Quantity_14,
-                                        storeDict);
-                                    WL1(MapLocation(ids, sdq.IdentificationCode_15), line.PO1, sdq.Quantity_16,
-                                        storeDict);
-                                    WL1(MapLocation(ids, sdq.IdentificationCode_17), line.PO1, sdq.Quantity_18,
-                                        storeDict);
-                                    WL1(MapLocation(ids, sdq.IdentificationCode_19), line.PO1, sdq.Quantity_20,
-                                        storeDict);
-                                    WL1(MapLocation(ids, sdq.IdentificationCode_21), line.PO1, sdq.Quantity_22,
-                                        storeDict);
+
+                                    foreach (var sdq in line.SDQ)
+                                    {
+                                        //WL("IdentificationCodeQualifier_02", sdq.IdentificationCodeQualifier_02);
+                                        WL1(MapLocation(ids, sdq.IdentificationCode_03), line.PO1, sdq.Quantity_04,
+                                            storeDict);
+                                        WL1(MapLocation(ids, sdq.IdentificationCode_05), line.PO1, sdq.Quantity_06,
+                                            storeDict);
+                                        WL1(MapLocation(ids, sdq.IdentificationCode_07), line.PO1, sdq.Quantity_08,
+                                            storeDict);
+                                        WL1(MapLocation(ids, sdq.IdentificationCode_09), line.PO1, sdq.Quantity_10,
+                                            storeDict);
+                                        WL1(MapLocation(ids, sdq.IdentificationCode_11), line.PO1, sdq.Quantity_12,
+                                            storeDict);
+                                        WL1(MapLocation(ids, sdq.IdentificationCode_13), line.PO1, sdq.Quantity_14,
+                                            storeDict);
+                                        WL1(MapLocation(ids, sdq.IdentificationCode_15), line.PO1, sdq.Quantity_16,
+                                            storeDict);
+                                        WL1(MapLocation(ids, sdq.IdentificationCode_17), line.PO1, sdq.Quantity_18,
+                                            storeDict);
+                                        WL1(MapLocation(ids, sdq.IdentificationCode_19), line.PO1, sdq.Quantity_20,
+                                            storeDict);
+                                        WL1(MapLocation(ids, sdq.IdentificationCode_21), line.PO1, sdq.Quantity_22,
+                                            storeDict);
+                                    }
+
+
                                 }
 
 
-                            }
-
-
-                            foreach (var store in storeDict)
-                            {
-
-
-                                foreach (var line in store.Value)
+                                foreach (var store in storeDict)
                                 {
-                                    WT(po.BEG.PurchaseOrderNumber_03);
-                                    WT(po.BEG.Date_05);
-                                    WT(string.Join("; ",
-                                        po.DTM.Select(d =>
-                                            ParseDateType(d.DateTimeQualifier_01) + " " + d.Date_02 + " " +
-                                            d.Time_03)));
-                                    WT(po.CTTLoop.AMT.MonetaryAmount_02);
-                                    WT(store.Key);
-                                    WT(line.PO1.AssignedIdentification_01);
-                                    WT(line.PO1.ProductServiceID_07);
-                                    WT("'" + line.PO1.ProductServiceID_09);
-                                    WT(line.PO1.ProductServiceID_11);
-                                    WT(line.PO1.ProductServiceID_13);
-                                    WT("'" + line.PO1.ProductServiceID_23);
-                                    WT(line.qty);
-                                    WT(line.PO1.UnitPrice_04);
-                                    WT(string.Join(";", po.REF.Select(r =>
-                                        MapRef(r.ReferenceIdentificationQualifier_01) + " = " +
-                                        r.ReferenceIdentification_02
-                                    )), true);
+
+
+                                    foreach (var line in store.Value)
+                                    {
+                                        fr.WT(po.BEG.PurchaseOrderNumber_03);
+                                        fr.WT(po.BEG.Date_05);
+                                        fr.WT(string.Join("; ",
+                                            po.DTM.Select(d =>
+                                                ParseDateType(d.DateTimeQualifier_01) + " " + d.Date_02 + " " +
+                                                d.Time_03)));
+                                        fr.WT(po.CTTLoop.AMT.MonetaryAmount_02);
+                                        fr.WT(store.Key);
+                                        fr.WT(line.PO1.AssignedIdentification_01);
+                                        fr.WT(line.PO1.ProductServiceID_07);
+                                        fr.WT("'" + line.PO1.ProductServiceID_09);
+                                        fr.WT(line.PO1.ProductServiceID_11);
+                                        fr.WT(line.PO1.ProductServiceID_13);
+                                        fr.WT("'" + line.PO1.ProductServiceID_23);
+                                        fr.WT(line.qty);
+                                        fr.WT(line.PO1.UnitPrice_04);
+                                        fr.WT(string.Join(";", po.REF.Select(r =>
+                                            MapRef(r.ReferenceIdentificationQualifier_01) + " = " +
+                                            r.ReferenceIdentification_02
+                                        )), true);
+                                    }
+
                                 }
 
+
+                                /*    foreach (var n1 in po.N1Loop)
+                                    {
+                                        WL("EntityIdentifierCode_01", n1.N1.EntityIdentifierCode_01);
+                                        WL("Name_02", n1.N1.Name_02);
+                                    }*/
+
+
+
+
                             }
-
-
-                            /*    foreach (var n1 in po.N1Loop)
-                                {
-                                    WL("EntityIdentifierCode_01", n1.N1.EntityIdentifierCode_01);
-                                    WL("Name_02", n1.N1.Name_02);
-                                }*/
-
-
-
 
                         }
-
-
                     }
 
                 }
@@ -431,9 +433,7 @@ namespace EdiParser
             dict[name].Add((line, qty));
         }
 
-        static void WT(string value, bool endLine = false)
-        {
-        }
+       
     }
 
     public class FieldWriter : IDisposable
