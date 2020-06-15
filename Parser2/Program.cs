@@ -7,6 +7,7 @@ using EdiFabric.Framework.Readers;
 using EdiFabric.Templates.X12005010;
 using Parser2;
 using Parser2.InventoryReco;
+using Parser2.LenovoApi;
 using TS856 = EdiFabric.Templates.X12005040.TS856;
 
 namespace EdiParser
@@ -17,9 +18,11 @@ namespace EdiParser
         static void Main(string[] args)
         {
             var root = @"C:\work\dev\edi";
-
-            InventoryRecoSender.SendInventoryForReceivings(Path.Combine(root, @"sample\lenovo\to_respond")).Wait();
+           var dddd = LenovoCatalogClient.GetChangedLenovoMaterials().Result;
             return;
+
+           // InventoryRecoSender.SendInventoryForReceivings(Path.Combine(root, @"sample\lenovo\to_respond")).Wait();
+           // return;
            //     X12214Writer.Write214(Path.Combine(root, "lw_sample\\214.txt"));
             // write goods received
        /*     DespatchAdviceWriter.WriteEdiFactAsnResponse(
@@ -254,7 +257,7 @@ namespace EdiParser
                       }
                   return;*/
 
-                foreach (var file1 in Directory.EnumerateFiles(root, "*RECONGROUP-925485US00-20200608095213093_519497895"))
+                foreach (var file1 in Directory.EnumerateFiles(root, "*RECONGROUP-925485US00-20200609114554603_519865969"))
                 {
 
                     // using (EdifactReader reader = new EdifactReader(new FileStream(Path.Combine(root, file), FileMode.Open),
